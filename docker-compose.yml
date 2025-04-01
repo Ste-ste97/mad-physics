@@ -1,0 +1,50 @@
+services:
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        uid: ${DOCKER_UID}
+        gid: ${DOCKER_GID}
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./docker/php/entrypoint.sh:/usr/local/bin/entrypoint.sh
+      - ./docker/supervisor/:/etc/supervisor/conf.d/
+    networks:
+      - app-network
+    command: supervisord
+
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - 93:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.2.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: user
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3837:3306"
+    volumes:
+      - ./docker/mysql-data/:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
