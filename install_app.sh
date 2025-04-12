@@ -5,11 +5,11 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
     cp .env.example .env
     # check if .env file not contains DOCKER_UID
     if ! grep -q "DOCKER_UID" .env; then
-        echo -e "\nDOCKER_UID=$(id -u)" >> .env
+        echo "DOCKER_UID=$(id -u)" >> .env
     fi
     # check if .env file not contains DOCKER_USER
-    if ! grep -q "DOCKER_USER" .env; then
-        echo "DOCKER_USER=$(whoami)" >> .env
+    if ! grep -q "DOCKER_GID" .env; then
+        echo "DOCKER_GID=$(id -g)" >> .env
     fi
     docker-compose build --no-cache
     docker-compose up -d
