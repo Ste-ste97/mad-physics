@@ -28,13 +28,6 @@ class Test extends Command
      */
     public function handle()
     {
-        $id = 1; // Example user ID
-        $users = User::nestedWhere('id', $id)->get();
-
-//        $user = Cache::asyncRemember('user_'.$id, 600, function () use ($id) {
-//            return User::find($id);
-//        });
         Log::info('Test command executed');
-        dd('Test command executed');
     }
 }
