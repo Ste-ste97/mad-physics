@@ -22,7 +22,7 @@ services:
     image: nginx:alpine
     restart: unless-stopped
     ports:
-      - 93:80
+      - 94:80
     volumes:
       - ./:/var/www
       - ./docker/nginx/conf.d:/etc/nginx/conf.d/
@@ -38,7 +38,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3837:3306"
+      - "3137:3306"
     volumes:
       - ./docker/mysql-data/:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
