@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Filament\Commands\MakeUserCommand as FilamentMakeUserCommand;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -32,6 +30,24 @@ class UserSeeder extends Seeder
 
         $admin->assignRole('Admin');
 
-        User::factory()->count(30)->create();
+        $teacher = $getUserModel->invoke($filamentMakeUserCommand)::create([
+            'name'           => 'Marios Panagi',
+            'email'          => 'mpanagi97@gmail.com',
+            'password'       => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        $teacher->assignRole('Teacher');
+
+
+        $testStudent = $getUserModel->invoke($filamentMakeUserCommand)::create([
+            'name'           => 'Stelios Chrysostomou',
+            'email'          => 'stelioschrysost@gmail.com',
+            'password'       => Hash::make('password'),
+            'remember_token' => Str::random(10),
+            'grade_level'    => 'C',
+        ]);
+
+        $testStudent->assignRole('Student');
     }
 }

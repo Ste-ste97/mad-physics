@@ -16,11 +16,14 @@ class RoleSeeder extends Seeder
     {
         // create Admin role and assign all permissions
         $admin = Role::create(['name' => 'Admin']);
-        $user = Role::create(['name' => 'User']);
+        $teacher = Role::create(['name' => 'Teacher']);
+        $student = Role::create(['name' => 'Student']);
+
 
         $permissions = Permission::pluck('id');
 
         $admin->givePermissionTo($permissions);
+        $teacher->givePermissionTo($permissions);
 
 
     }

@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 
+use Althinect\FilamentSpatieRolesPermissions\Resources\PermissionResource;
+use Althinect\FilamentSpatieRolesPermissions\Resources\RoleResource;
 use App\Filament\Resources\UserResource;
 use App\Livewire\ProfileInformationComponent;
 use App\Models\User;
@@ -35,13 +37,16 @@ class MainPanelProvider extends PanelProvider
             ->id('leave')
             ->path('/')
             ->login()
+            ->registration()
             ->darkMode(false)
             ->databaseNotifications()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Teal,
             ])
             ->resources([
                 UserResource::class,
+                RoleResource::class,
+                PermissionResource::class,
             ])
             ->pages([
                 Pages\Dashboard::class,
@@ -67,7 +72,7 @@ class MainPanelProvider extends PanelProvider
             ->plugins([
                 FilamentDeveloperLoginsPlugin::make()
                                              ->users([
-                                                 'Demo User'  => !app()->runningInConsole() ? User::where('id', '!=', 1)->first()?->email: null,
+                                                 'Demo User'  => !app()->runningInConsole() ? User::where('id', '!=', 1)->first()?->email : null,
                                                  'Demo Admin' => 'admin@admin.com',
                                              ])
                                              ->switchable(false)

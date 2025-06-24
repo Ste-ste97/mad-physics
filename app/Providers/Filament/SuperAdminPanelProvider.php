@@ -39,7 +39,7 @@ class SuperAdminPanelProvider extends PanelProvider
             ->path('super-admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Teal,
             ])
             ->resources([
                 UserResource::class,

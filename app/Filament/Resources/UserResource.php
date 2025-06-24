@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -38,6 +37,14 @@ class UserResource extends Resource
                          ->password()
                          ->required(fn($livewire) => $livewire instanceof CreateRecord)
                          ->visible(fn($livewire) => $livewire instanceof CreateRecord),
+                Select::make('grade_level')
+                      ->options([
+                          'A' => "A' Lyceum",
+                          'B' => "B' Lyceum",
+                          'C' => "C' Lyceum",
+                      ])
+                      ->nullable()
+                      ->searchable(),
                 Select::make('roles')
                       ->multiple()
                       ->relationship('roles', 'name')
@@ -58,6 +65,13 @@ class UserResource extends Resource
                 TextColumn::make('email')
                           ->searchable()
                           ->sortable(),
+                TextColumn::make('grade_level')
+                          ->formatStateUsing(fn(string|null $state) => match ($state) {
+                              'A' => "A' Lyceum",
+                              'B' => "B' Lyceum",
+                              'C' => "C' Lyceum",
+                              default => '-',
+                          }),
             ])
             ->filters([
                 //
