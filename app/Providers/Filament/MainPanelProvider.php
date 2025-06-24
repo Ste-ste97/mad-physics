@@ -37,7 +37,6 @@ class MainPanelProvider extends PanelProvider
             ->id('leave')
             ->path('/')
             ->login()
-            ->registration()
             ->darkMode(false)
             ->databaseNotifications()
             ->colors([
