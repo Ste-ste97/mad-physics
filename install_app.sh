@@ -11,8 +11,8 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
     if ! grep -q "DOCKER_GID" .env; then
         echo "DOCKER_GID=$(id -g)" >> .env
     fi
-    docker-compose build --no-cache
-    docker-compose up -d
+    docker compose build --no-cache
+    docker compose up -d
     echo "Done with docker"
     sudo chmod u+x composer.sh
     ./composer.sh install
