@@ -11,13 +11,13 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
     if ! grep -q "DOCKER_GID" .env; then
         echo "DOCKER_GID=$(id -g)" >> .env
     fi
-    docker compose build --no-cache
-    docker compose up -d
+    docker-compose build --no-cache
+    docker-compose up -d
     echo "Done with docker"
-    sudo chmod u+x composer.sh
+    chmod u+x composer.sh
     ./composer.sh install
-    sudo chmod o+w -R storage/
-    sudo chmod u+x artisan.sh
+    chmod o+w -R storage/
+    chmod u+x artisan.sh
     ./artisan.sh key:generate
     # wait for mysql to start
     sleep 30
