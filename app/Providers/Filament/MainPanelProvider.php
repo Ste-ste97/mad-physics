@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 
 use Althinect\FilamentSpatieRolesPermissions\Resources\PermissionResource;
 use Althinect\FilamentSpatieRolesPermissions\Resources\RoleResource;
+use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\UserResource;
 use App\Livewire\ProfileInformationComponent;
 use App\Models\User;
@@ -48,7 +49,7 @@ class MainPanelProvider extends PanelProvider
                 PermissionResource::class,
             ])
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
