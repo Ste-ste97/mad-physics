@@ -47,7 +47,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
     ];
 
     public function canImpersonate(): bool
@@ -60,5 +60,14 @@ class User extends Authenticatable
         return $this->hasRole('Admin');
     }
 
+    public function isTeacher(): bool
+    {
+        return $this->hasRole('Teacher');
+    }
+
+    public function isStudent(): bool
+    {
+        return $this->hasRole('Student');
+    }
 
 }

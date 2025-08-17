@@ -6,8 +6,11 @@ namespace App\Providers\Filament;
 use Althinect\FilamentSpatieRolesPermissions\Resources\PermissionResource;
 use Althinect\FilamentSpatieRolesPermissions\Resources\RoleResource;
 use App\Filament\Pages\Dashboard;
+use App\Filament\Resources\StudentUploadResource;
+use App\Filament\Resources\UploadPointResource;
 use App\Filament\Resources\UserResource;
 use App\Livewire\ProfileInformationComponent;
+use App\Models\StudentUpload;
 use App\Models\User;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -45,6 +48,8 @@ class MainPanelProvider extends PanelProvider
             ])
             ->resources([
                 UserResource::class,
+                UploadPointResource::class,
+                StudentUploadResource::class,
             ])
             ->pages([
                 Dashboard::class,

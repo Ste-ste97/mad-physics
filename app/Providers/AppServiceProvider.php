@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use BezhanSalleh\PanelSwitch\PanelSwitch;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -39,5 +40,7 @@ class AppServiceProvider extends ServiceProvider
         PanelSwitch::configureUsing(function (PanelSwitch $panelSwitch) {
             $panelSwitch->visible(fn (): bool => auth()->id() === 1);
         });
+
+        Model::unguard();
     }
 }
