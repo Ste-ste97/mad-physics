@@ -35,7 +35,7 @@ class MainPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('leave')
+            ->id('admin')
             ->path('/')
             ->login()
             ->darkMode(false)
@@ -45,8 +45,6 @@ class MainPanelProvider extends PanelProvider
             ])
             ->resources([
                 UserResource::class,
-                RoleResource::class,
-                PermissionResource::class,
             ])
             ->pages([
                 Dashboard::class,
